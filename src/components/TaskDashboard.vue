@@ -2,36 +2,40 @@
   <MDBContainer class="m-5" >
     <MDBCard class="shadow-5 border border-1">
       <MDBCardBody >
-        <div class="m-5 d-flex flex-row align-items-center justify-content-between">
+        <div class="mx-5 mt-3 d-flex flex-row align-items-center justify-content-between">
             <div class="fs-2 fw-bold">Tasks</div>
             <div>
-              <button type="button" class="btn btn-primary">Add</button>
+              <AddTaskModal/>
             </div>
           </div>
-        <div class="m-5">
-          <div v-for="(task, index) in tasks">
-            <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
-              <li
-                class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                <MDBCheckbox label="Status" v-model="task.status" />
-              </li>
-              <li
-                class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                <p class="lead fw-normal mb-0">{{ task.title }}</p>
-              </li>
-              <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                <div class="d-flex flex-row justify-content-end mb-1">
-                  <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
-                      class="fas fa-pencil-alt me-3"></i></a>
-                  <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
-                      class="fas fa-trash-alt"></i></a>
-                </div>
-              </li>
-            </ul>
+        <div class="mx-5 my-3">
+          <!-- Build V-For List to render tasks in div below -->
+          <div >
+            <MDBRow 
+              :class="[
+                'p-3',
+                // index == 0 ? 'border border-2 border-bottom-0 rounded-top' : '',
+                // 'border border-2',
+                // index == tasks.length - 1 ? 'border border-2 rouned-3 rounded-bottom' : 'border-bottom-0'
+              ]"
+            >
+              <MDBCol col="4" class="d-flex justify-content-start">
+                <!-- Add Task Title Below -->
+                <p class="lead fw-normal mb-0"> TITLE </p>
+              </MDBCol>
+              <MDBCol col="3" class="d-flex justify-content-end">
+                <!-- implement logic so that when checkbox is altered, the value is updated in the store -->
+                <!-- <MDBCheckbox label="Completed" v-model="" />  -->
+              </MDBCol>
+              <MDBCol col="5" class="d-flex justify-content-end">
+                <!-- This modal takes an index as prop so data can be prepopulated -->
+                <!-- <EditTaskModal :index=""/> -->
+                <!-- add funtion to handle deleting a task -->
+                <!-- <MDBBtn class="ms-3" color="danger" size="sm" @click="">Delete</MDBBtn> -->
+              </MDBCol>
+            </MDBRow>
           </div>
-          <!-- Build V-For List to Visualize Tasks -->
         </div>
-
       </MDBCardBody>
     </MDBCard>
   </MDBContainer>
@@ -40,17 +44,20 @@
 import { 
   MDBCard, 
   MDBCardBody, 
-  MDBContainer, 
-  MDBCheckbox 
+  MDBContainer,
+  MDBRow, 
+  MDBCol,
+  MDBCheckbox,
+  MDBBtn
 } from "mdb-vue-ui-kit"
 import { useTaskStore } from '../store/taskStore'
-import { computed } from "vue"
+import { provide } from "vue"
+import AddTaskModal from "./AddTaskModal.vue";
+import EditTaskModal from "./EditTaskModal.vue";
 
 const store = useTaskStore()
+provide('store', store)
 
-// utilize store getter to get tasks
-const tasks = computed(() => store.getTasks)
-
-// init add, delete, update functions 
+// utilize store getter to get tasks and task statuses
 
 </script>

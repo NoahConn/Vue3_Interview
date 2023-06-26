@@ -18,7 +18,9 @@ export const useTaskStore = defineStore("taskStore", {
     ]
   }), 
   getters: {
-    getTasks: (state) => state.tasks
+    getTasks: (state) => state.tasks,
+    getTask: (state) => (index) => state.tasks[index],
+    getStatuses: (state) => state.tasks.map(task => task.completed)
   }, 
   actions: {
     addTask(task) {
@@ -27,7 +29,7 @@ export const useTaskStore = defineStore("taskStore", {
     deleteTask(index) {
       this.tasks.splice(index, 1)
     },
-    updateTask(task, index) {
+    editTask(task, index) {
       this.tasks[index] = task
     }
   }
