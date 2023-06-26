@@ -13,6 +13,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "mdb-vue-ui-kit": "git+https://oauth2:6fxyEnRsJxufZXg8nPcG@git.mdbootstrap.com/mdb/vue/mdb5/prd/mdb5-vue-ui-kit-pro-advanced",
+    "pinia": "^2.1.4",
     "vite": "^4.3.9"
   }
 }
